@@ -77,7 +77,6 @@ func! <SID>:PydocLoad(pyargs)
 	" build and execute the command
 	let cmd = "new +r!" . escape(s:PYDOC_CMD," ")	" new buff, call pydoc
 	let cmd = cmd . "\\ " . escape(a:pyargs," ")	" the pydoc args
-	let cmd = cmd . " " . window_name				" the name of the window
 	try
 		silent exec cmd
 	catch
@@ -88,12 +87,6 @@ func! <SID>:PydocLoad(pyargs)
 		return
 	endtry
 
-
-	" make sure the command succeeded and we're in the right buffer
-	if bufname("") != "pydoc - " . a:pyargs
-		" hmmm something didn't work... lets bail
-		return
-	endif
 
 	" roll back, delete empty lines at beginning
 	normal gg
