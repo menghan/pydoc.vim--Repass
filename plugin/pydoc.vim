@@ -73,12 +73,12 @@ func! <SID>:PydocLoad(pyargs)
 		exec "new " . window_name
 		return
 	endif
-	
+
 	" build and execute the command
 	let cmd = "new +r!" . escape(s:PYDOC_CMD," ")	" new buff, call pydoc
 	let cmd = cmd . "\\ " . escape(a:pyargs," ")	" the pydoc args
 	let cmd = cmd . " " . window_name				" the name of the window
-	try 
+	try
 		silent exec cmd
 	catch
 		redraw |
@@ -87,7 +87,7 @@ func! <SID>:PydocLoad(pyargs)
 		\ echohl None
 		return
 	endtry
-	
+
 
 	" make sure the command succeeded and we're in the right buffer
 	if bufname("") != "pydoc - " . a:pyargs
@@ -100,7 +100,7 @@ func! <SID>:PydocLoad(pyargs)
 	while getline(1) =~ "^\s\*$"
 		normal dd
 	endwhile
-	
+
 	" set some convenient options to avoid error messages etc
 	setlocal nomodifiable
 	setlocal buftype=nowrite
